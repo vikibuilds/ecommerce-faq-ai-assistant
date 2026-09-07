@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — Nocturne & Co.</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .shop-hero{ padding:64px 0 40px; border-bottom:1px solid var(--line); }
+  .shop-hero p{ color:var(--linen-dim); max-width:52ch; margin-top:16px; }
+
+  .filter-row{
+    display:flex; gap:10px; flex-wrap:wrap;
+    padding:28px 0; position:sticky; top:73px; background:var(--ink); z-index:10;
+    border-bottom:1px solid var(--line);
+  }
+  .filter-btn{
+    padding:9px 18px; border:1px solid var(--line-strong); background:none;
+    color:var(--linen-dim); font-family:var(--sans); font-size:0.86rem; cursor:pointer;
+  }
+  .filter-btn:hover{ color:var(--linen); border-color:var(--brass); }
+  .filter-btn.active{ background:var(--brass); border-color:var(--brass); color:var(--ink); }
+
+  .shop-grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:2px;
+    background:var(--line); border:1px solid var(--line);
+    margin:44px 0 100px;
+  }
+  .p-card{
+    background:var(--panel); padding:36px 28px 26px;
+    display:flex; flex-direction:column; gap:16px; position:relative;
+    transition:background 0.25s ease;
+  }
+  .p-card:hover{ background:var(--panel-2); }
+  .p-card .badge{
+    position:absolute; top:20px; right:20px;
+    font-size:0.7rem; color:var(--sage); border:1px solid var(--sage);
+    padding:3px 9px;
+  }
+  .p-card .icon-box{ width:60px; height:60px; color:var(--brass-light); }
+  .p-card .icon-box svg{ width:100%; height:100%; }
+  .p-card .cat{ font-size:0.78rem; color:var(--sage); }
+  .p-card h3{ font-size:1.3rem; margin-top:2px; }
+  .p-card .desc{ font-size:0.9rem; color:var(--linen-dim); }
+  .p-card-foot{ display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:10px; }
+  .p-card .price{ font-family:var(--serif); font-size:1.25rem; color:var(--brass-light); }
+  .add-btn{
+    font-size:0.82rem; padding:9px 16px; border:1px solid var(--brass);
+    background:none; color:var(--linen); cursor:pointer; font-family:var(--sans);
+    transition:background 0.2s ease, color 0.2s ease;
+  }
+  .add-btn:hover{ background:var(--brass); color:var(--ink); }
+
+  @media (max-width:860px){ .shop-grid{ grid-template-columns:1fr 1fr; } .filter-row{ top:0; } }
+  @media (max-width:560px){ .shop-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a href="index.html" class="wordmark">Nocturne <span>&amp; Co.</span></a>
+    <nav class="links">
+      <a href="index.html">Home</a>
+      <a href="shop.html" class="active">Shop</a>
+      <a href="about.html">The Atelier</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <button class="cart-btn" onclick="openCart()">
+        Basket <span class="cart-count" id="cart-count">0</span>
+      </button>
+      <button class="menu-toggle" onclick="toggleMobileNav()">&#9776;</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="shop-hero">
+    <span class="eyebrow">Twelve pieces, currently in stock</span>
+    <h1 style="font-size:clamp(2.2rem,4vw,3.2rem); margin-top:16px;">The full collection</h1>
+    <p>Candles, diffusers, mists, incense and the tools to look after them. Everything ships within three working days of pouring.</p>
+  </section>
+
+  <div class="filter-row" id="filter-row">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="candle">Candles</button>
+    <button class="filter-btn" data-filter="diffuser">Diffusers &amp; mists</button>
+    <button class="filter-btn" data-filter="tool">Care tools</button>
+    <button class="filter-btn" data-filter="box">Gift sets</button>
+  </div>
+
+  <div class="shop-grid" id="shop-grid">
+
+    <div class="p-card" data-cat="candle">
+      <div class="icon-box"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M24 6c3 4 4.5 6.6 4.5 9 0 2.4-2 4-4.5 4s-4.5-1.6-4.5-4c0-2.4 1.5-5 4.5-9z"/><rect x="14" y="20" width="20" height="20" rx="1"/><line x1="14" y1="26" x2="34" y2="26"/></svg></div>
+      <span class="cat">Coconut wax candle · 220g</span>
+      <h3>Amber Dusk</h3>
+      <p class="desc">Labdanum, dried fig, warm tobacco leaf.</p>
+      <div class="p-card-foot">
+        <span class="price">$38</span>
+        <button class="add-btn" onclick="addToCart('amber-dusk','Amber Dusk',38,'candle')">Add to basket</button>
+      </div>
+    </div>
+
+    <div class="p-card" data-cat="candle">
+      <div class="icon-box"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M24 6c3 4 4.5 6.6 4.5 9 0 2.4-2 4-4.5 4s-4.5-1.6-4.5-4c0-2.4 1.5-5 4.5-9z"/><rect x="14" y="20" width="20" height="20" rx="1"/><line x1="14" y1="26" x2="34" y2="26"/></svg></div>
+      <span class="cat">Coconut wax candle · 220g</span>
+      <h3>Moss &amp; Cedar</h3>
+      <p class="desc">Damp forest floor, cedar shaving, oakmoss.</p>
+      <div class="p-card-foot">
+        <span class="price">$38</span>
+        <button class="add-btn" onclick="addToCart('moss-cedar','Moss & Cedar',38,'candle')">Add to basket</button>
+      </div>
+    </div>
+
+    <div class="p-card" data-cat="candle">
+      <div class="icon-box"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M24 6c3 4 4.5 6.6 4.5 9 0 2.4-2 4-4.5 4s-4.5-1.6-4.5-4c0-2.4 1.5-5 4.5-9z"/><rect x="14" y="20" width="20" height="20" rx="1"/><line x1="14" y1="26" x2="34" y2="26"/></svg></div>
+      <span class="cat">Coconut wax candle · 220g</span>
+      <h3>Salt Air</h3>
+      <p class="desc">Sea fig, sun-warmed driftwood, ozonic musk.</p>
+      <div class="p-card-foot">
+        <span class="price">$38</span>
+        <button class="add-btn" onclick="addToCart('salt-air','Salt Air',38,'candle')">Add to basket</button>
+      </div>
+    </div>
+
+    <div class="p-card" data-cat="candle">
+      <span class="badge">New</span>
+      <div class="icon-box"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M24 6c3 4 4.5 6.6 4.5 9 0 2.4-2 4-4.5 4s-4.5-1.6-4.5-4c0-2.4 1.5-5 4.5-9z"/><rect x="14" y="20" width="20" height="20" rx="1"/><line x1="14" y1="26" x2="34" y2="26"/></svg></div>
+      <span class="cat">Coconut wax candle · 260g</span>
+      <h3>Fig Leaf &amp; Bergamot</h3>
+      <p class="desc">Green fig, cold-pressed bergamot, soft musk.</p>
+      <div class="p-card-foot">
+        <span class="price">$42</span>
+        <button class="add-btn" onclick="addToCart('fig-bergamot','Fig Leaf & Bergamot',42,'candle')">Add to basket</button>
+      </div>
+    </div>
+
+    <div class="p-card" data-cat="candle">
+      <span class="badge">New</span>
+      <div class="icon-box"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M24 6c3 4 4.5 6.6 4.5 9 0 2.4-2 4-4.5 4s-4.5-1.6-4.5-4c0-2.4 1.5-5 4.5-9z"/><rect x="14" y="20" width="20" height="20" rx="1"/><line x1="14" y1="26" x2="34" y2="26"/></svg></div>
+      <span class="cat">Coconut wax candle · 260g</span>
+      <h3>Smoked Vetiver</h3>
+      <p class="desc">Vetiver root, birch tar, black pepper.</p>
+      <div class="p-card-foot">
+        <span class="price">$42</span>
+        <button class="add-btn" onclick="addToCart('smoked-vetiver','Smoked Vetiver',42,'candle')">Add to basket</button>
+      </div>
+    </div>
+
+    <div class="p-card" data-cat="diffuser">
+      <div class="icon-box"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M17 20h14l-2 20H19l-2-20z"/><path d="M19 20V13a5 5 0 0 1 10 0v7"/><line x1="22" y1="6" x2="20" y2="14"/><line x1="26" y1="6" x2="28" y2="14"/></svg></div>
+      <span class="cat">Reed diffuser · 120ml</span>
+      <h3>Nocturne No. 3</h3>
+      <p class="desc">Smoked vetiver, dark rum, cracked cardamom.</p>
+      <div class="p-card-foot">
+        <span class="price">$54</span>
+        <button class="add-btn" onclick="addToCart('nocturne-3','Nocturne No. 3',54,'diffuser')">Add to basket</button>
+      </div>
+    </div>
+
+    <div class="p-card" data-cat="diffuser">
+      <div class="icon-box"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M17 20h14l-2 20H19l-2-20z"/><path d="M19 20V13a5 5 0 0 1 10 0v7"/><line x1="22" y1="6" x2="20" y2="14"/><line x1="26" y1="6" x2="28" y2="14"/></svg></div>
+      <span class="cat">Reed diffuser · 120ml</span>
+      <h3>Quiet Hour</h3>
+      <p class="desc">White tea, cedar, a trace of sandalwood.</p>
+      <div class="p-card-foot">
+        <span class="price">$54</span>
+        <button class="add-btn" onclick="addToCart('quiet-hour','Quiet Hour',54,'diffuser')">Add to basket</button>
+      </div>
+    </div>
+
+    <div class="p-card" data-cat="diffuser">
+      <div class="icon-box"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="17" y="16" width="12" height="24" rx="1"/><rect x="19" y="10" width="8" height="6"/><path d="M27 9h6M29 6h6M31 12h4"/></svg></div>
+      <span class="cat">Room mist · 100ml</span>
+      <h3>Ash &amp; Ember</h3>
+      <p class="desc">Birchwood smoke, clove, warm amber.</p>
+      <div class="p-card-foot">
+        <span class="price">$32</span>
+        <button class="add-btn" onclick="addToCart('ash-ember','Ash & Ember',32,'mist')">Add to basket</button>
+      </div>
+    </div>
+
+    <div class="p-card" data-cat="diffuser">
+      <div class="icon-box"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M16 40h16"/><path d="M20 40V18M24 40V14M28 40V18"/><path d="M24 10c1.5 2 1.5 3-.4 3M20 14c1.5 2 1.5 3-.4 3M28 14c1.5 2 1.5 3-.4 3"/></svg></div>
+      <span class="cat">Incense · bundle of 20</span>
+      <h3>Copal &amp; Palo Santo</h3>
+      <p class="desc">Hand-rolled, slow-burning, unscented smoke.</p>
+      <div class="p-card-foot">
+        <span class="price">$22</span>
+        <button class="add-btn" onclick="addToCart('copal-palo-santo','Copal & Palo Santo',22,'incense')">Add to basket</button>
+      </div>
+    </div>
+
+    <div class="p-card" data-cat="tool">
+      <div class="icon-box"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 12l24 24M28 8l4 4-16 16-4-4z"/><path d="M14 34l-4 4 4 4 4-4"/></svg></div>
+      <span class="cat">Care tool · solid brass</span>
+      <h3>Wick Trimmer</h3>
+      <p class="desc">Angled blade, keeps the flame low and even.</p>
+      <div class="p-card-foot">
+        <span class="price">$28</span>
+        <button class="add-btn" onclick="addToCart('wick-trimmer','Brass Wick Trimmer',28,'tool')">Add to basket</button>
+      </div>
+    </div>
+
+    <div class="p-card" data-cat="tool">
+      <div class="icon-box"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M14 22a10 6 0 0 1 20 0z"/><line x1="24" y1="22" x2="24" y2="10"/><line x1="14" y1="22" x2="34" y2="22"/></svg></div>
+      <span class="cat">Care tool · hand-blown glass</span>
+      <h3>Glass Snuffer</h3>
+      <p class="desc">Smothers the flame without any smoke or spatter.</p>
+      <div class="p-card-foot">
+        <span class="price">$24</span>
+        <button class="add-btn" onclick="addToCart('glass-snuffer','Glass Snuffer',24,'snuffer')">Add to basket</button>
+      </div>
+    </div>
+
+    <div class="p-card" data-cat="box">
+      <div class="icon-box"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M8 16l16-7 16 7-16 7z"/><path d="M8 16v16l16 7 16-7V16"/><path d="M24 23v17"/></svg></div>
+      <span class="cat">Gift set · three 220g candles</span>
+      <h3>The Atelier Set</h3>
+      <p class="desc">Amber Dusk, Moss &amp; Cedar and Salt Air, boxed.</p>
+      <div class="p-card-foot">
+        <span class="price">$96</span>
+        <button class="add-btn" onclick="addToCart('atelier-set','The Atelier Set',96,'box')">Add to basket</button>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<footer class="site">
+  <div class="wrap footer-grid">
+    <div>
+      <a href="index.html" class="wordmark">Nocturne <span>&amp; Co.</span></a>
+      <p style="margin-top:16px;">Small-batch candles and home fragrance, hand-poured in a converted glasshouse.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul class="footer-links">
+        <li><a href="shop.html">Candles</a></li>
+        <li><a href="shop.html">Diffusers &amp; mists</a></li>
+        <li><a href="shop.html">Care tools</a></li>
+        <li><a href="shop.html">Gift sets</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Studio</h4>
+      <ul class="footer-links">
+        <li><a href="about.html">The Atelier</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html">Wholesale</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Visit</h4>
+      <p>19 Kiln Row<br>Bristol, BS1</p>
+      <p style="margin-top:10px;">Tues–Sat, 10–5</p>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>&copy; 2026 Nocturne &amp; Co.</span>
+    <span>Poured by hand, every time.</span>
+  </div>
+</footer>
+
+<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-head">
+    <h3>Your basket</h3>
+    <button class="cart-close" onclick="closeCart()">&times;</button>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-foot">
+    <div class="cart-subtotal">
+      <span>Subtotal</span>
+      <span class="amount" id="cart-subtotal-amount">$0.00</span>
+    </div>
+    <a href="contact.html" class="btn solid" style="width:100%; justify-content:center;">Checkout</a>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+<script>
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('.p-card').forEach(card => {
+        card.style.display = (f === 'all' || card.dataset.cat === f) ? '' : 'none';
+      });
+    });
+  });
+</script>
+</body>
+</html>

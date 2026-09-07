@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nocturne & Co. — Small-batch candles &amp; home fragrance</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .hero{
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    align-items:center;
+    gap:40px;
+    padding:76px 0 100px;
+  }
+  .hero-copy .eyebrow{ margin-bottom:22px; display:block; }
+  .hero-copy h1{ margin-bottom:26px; }
+  .hero-copy h1 em{ color:var(--brass-light); font-style:italic; }
+  .hero-copy p.lede{ font-size:1.08rem; color:var(--linen-dim); max-width:46ch; margin-bottom:34px; }
+  .hero-actions{ display:flex; gap:16px; }
+
+  .hero-art{ position:relative; display:flex; justify-content:center; }
+  .flame-wrap{ width:min(360px, 100%); }
+  @keyframes flicker{
+    0%,100%{ transform:scaleY(1) scaleX(1) translateX(0); }
+    30%{ transform:scaleY(1.04) scaleX(0.98) translateX(-1px); }
+    55%{ transform:scaleY(0.97) scaleX(1.02) translateX(1px); }
+    80%{ transform:scaleY(1.02) scaleX(0.99) translateX(0); }
+  }
+  .flame{ transform-origin:50% 85%; animation:flicker 4.2s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce){ .flame{ animation:none; } }
+
+  section.strip{ padding:60px 0; border-top:1px solid var(--line); }
+  .strip-row{ display:flex; justify-content:space-between; gap:30px; flex-wrap:wrap; }
+  .strip-item{ flex:1; min-width:200px; }
+  .strip-item .num{ font-family:var(--serif); font-size:1rem; color:var(--brass); margin-bottom:10px; display:block; }
+  .strip-item p{ color:var(--linen-dim); font-size:0.95rem; max-width:32ch; }
+
+  section.featured{ padding:100px 0; }
+  .section-head{ display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:50px; gap:24px; flex-wrap:wrap; }
+  .section-head p{ color:var(--linen-dim); max-width:38ch; }
+
+  .grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:2px; background:var(--line); border:1px solid var(--line); }
+  .card{
+    background:var(--panel); padding:38px 30px 30px;
+    display:flex; flex-direction:column; gap:18px;
+    transition:background 0.25s ease;
+  }
+  .card:hover{ background:var(--panel-2); }
+  .card .icon-box{ width:64px; height:64px; color:var(--brass-light); }
+  .card .icon-box svg{ width:100%; height:100%; }
+  .card h3{ font-size:1.35rem; }
+  .card .scent-note{ font-size:0.86rem; color:var(--sage); }
+  .card-foot{ display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:8px; }
+  .card-foot .price{ font-family:var(--serif); font-size:1.2rem; color:var(--brass-light); }
+  .add-link{ font-size:0.82rem; border-bottom:1px solid var(--brass); padding-bottom:2px; cursor:pointer; background:none; border-top:none; border-left:none; border-right:none; color:var(--linen); font-family:var(--sans); }
+  .add-link:hover{ color:var(--brass-light); }
+
+  .view-all{ text-align:center; margin-top:50px; }
+
+  section.story{
+    padding:100px 0 120px;
+    display:grid; grid-template-columns:0.85fr 1.15fr; gap:70px; align-items:center;
+    border-top:1px solid var(--line);
+  }
+  .story-visual{ aspect-ratio:4/5; background:var(--panel); border:1px solid var(--line); display:flex; align-items:center; justify-content:center; }
+  .story-visual svg{ width:58%; color:var(--brass); }
+  .story-copy p.lede{ font-size:1.15rem; color:var(--linen); margin-bottom:20px; font-family:var(--serif); font-style:italic; max-width:36ch; }
+  .story-copy p.body{ color:var(--linen-dim); max-width:48ch; margin-bottom:30px; }
+
+  @media (max-width:860px){
+    .hero{ grid-template-columns:1fr; padding-top:40px; }
+    .hero-art{ order:-1; }
+    .grid{ grid-template-columns:1fr 1fr; }
+    section.story{ grid-template-columns:1fr; }
+    .story-visual{ aspect-ratio:16/9; }
+  }
+  @media (max-width:560px){
+    .grid{ grid-template-columns:1fr; }
+    .strip-row{ flex-direction:column; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a href="index.html" class="wordmark">Nocturne <span>&amp; Co.</span></a>
+    <nav class="links">
+      <a href="index.html" class="active">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">The Atelier</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <button class="cart-btn" onclick="openCart()">
+        Basket <span class="cart-count" id="cart-count">0</span>
+      </button>
+      <button class="menu-toggle" onclick="toggleMobileNav()">&#9776;</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="hero">
+    <div class="hero-copy">
+      <span class="eyebrow">Hand-poured in small batches, 12 at a time</span>
+      <h1>Light kept<br><em>after dark.</em></h1>
+      <p class="lede">Coconut-wax candles and reed diffusers, poured in a converted glasshouse and scented in runs too small to rush. Nothing synthetic, nothing loud.</p>
+      <div class="hero-actions">
+        <a href="shop.html" class="btn solid">Shop the collection</a>
+        <a href="about.html" class="btn ghost">Our process</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <svg class="flame-wrap" viewBox="0 0 320 400" fill="none">
+        <g class="flame">
+          <path d="M160 60c26 38 40 64 40 92 0 30-18 50-40 50s-40-20-40-50c0-28 14-54 40-92z" fill="none" stroke="#B98D4A" stroke-width="1.4"/>
+          <path d="M160 100c12 20 18 34 18 48 0 15-8 25-18 25s-18-10-18-25c0-14 6-28 18-48z" fill="#B98D4A" opacity="0.35"/>
+        </g>
+        <rect x="90" y="170" width="140" height="150" fill="none" stroke="#7C9885" stroke-width="1" opacity="0.6"/>
+        <line x1="90" y1="205" x2="230" y2="205" stroke="#7C9885" stroke-width="1" opacity="0.4"/>
+        <line x1="120" y1="340" x2="200" y2="340" stroke="#3a4a3f" stroke-width="1"/>
+      </svg>
+    </div>
+  </section>
+
+  <section class="strip">
+    <div class="strip-row">
+      <div class="strip-item">
+        <span class="num">01</span>
+        <p>Every wax is a coconut-soy blend, chosen for an even, tunnel-free burn that runs 55 to 60 hours a jar.</p>
+      </div>
+      <div class="strip-item">
+        <span class="num">02</span>
+        <p>Fragrances are built in-house from essential oils and skin-safe aromatics, then rested for three weeks before pouring.</p>
+      </div>
+      <div class="strip-item">
+        <span class="num">03</span>
+        <p>Vessels are kept — reused for offcuts, refilled at the atelier, or returned to the glassmaker at the end of their life.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">A short list, not a catalog</span>
+        <h2>Where to begin</h2>
+      </div>
+      <p>Five pieces from the current collection. The full range, including care tools and the gift set, lives in the shop.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <div class="icon-box">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M24 6c3 4 4.5 6.6 4.5 9 0 2.4-2 4-4.5 4s-4.5-1.6-4.5-4c0-2.4 1.5-5 4.5-9z"/><rect x="14" y="20" width="20" height="20" rx="1"/><line x1="14" y1="26" x2="34" y2="26"/></svg>
+        </div>
+        <div>
+          <h3>Amber Dusk</h3>
+          <p class="scent-note">Labdanum, dried fig, warm tobacco</p>
+        </div>
+        <div class="card-foot">
+          <span class="price">$38</span>
+          <button class="add-link" onclick="addToCart('amber-dusk','Amber Dusk',38,'candle')">Add</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon-box">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M24 6c3 4 4.5 6.6 4.5 9 0 2.4-2 4-4.5 4s-4.5-1.6-4.5-4c0-2.4 1.5-5 4.5-9z"/><rect x="14" y="20" width="20" height="20" rx="1"/><line x1="14" y1="26" x2="34" y2="26"/></svg>
+        </div>
+        <div>
+          <h3>Moss &amp; Cedar</h3>
+          <p class="scent-note">Damp forest floor, cedar shaving, oakmoss</p>
+        </div>
+        <div class="card-foot">
+          <span class="price">$38</span>
+          <button class="add-link" onclick="addToCart('moss-cedar','Moss & Cedar',38,'candle')">Add</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon-box">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M17 20h14l-2 20H19l-2-20z"/><path d="M19 20V13a5 5 0 0 1 10 0v7"/><line x1="22" y1="6" x2="20" y2="14"/><line x1="26" y1="6" x2="28" y2="14"/></svg>
+        </div>
+        <div>
+          <h3>Nocturne No. 3</h3>
+          <p class="scent-note">Reed diffuser — smoked vetiver, dark rum</p>
+        </div>
+        <div class="card-foot">
+          <span class="price">$54</span>
+          <button class="add-link" onclick="addToCart('nocturne-3','Nocturne No. 3',54,'diffuser')">Add</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon-box">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M24 6c3 4 4.5 6.6 4.5 9 0 2.4-2 4-4.5 4s-4.5-1.6-4.5-4c0-2.4 1.5-5 4.5-9z"/><rect x="14" y="20" width="20" height="20" rx="1"/><line x1="14" y1="26" x2="34" y2="26"/></svg>
+        </div>
+        <div>
+          <h3>Salt Air</h3>
+          <p class="scent-note">Sea fig, driftwood, ozonic musk</p>
+        </div>
+        <div class="card-foot">
+          <span class="price">$38</span>
+          <button class="add-link" onclick="addToCart('salt-air','Salt Air',38,'candle')">Add</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon-box">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="17" y="16" width="12" height="24" rx="1"/><rect x="19" y="10" width="8" height="6"/><path d="M27 9h6M29 6h6M31 12h4"/></svg>
+        </div>
+        <div>
+          <h3>Ash &amp; Ember</h3>
+          <p class="scent-note">Room mist — birchwood smoke, clove</p>
+        </div>
+        <div class="card-foot">
+          <span class="price">$32</span>
+          <button class="add-link" onclick="addToCart('ash-ember','Ash & Ember',32,'mist')">Add</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="icon-box">
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M8 16l16-7 16 7-16 7z"/><path d="M8 16v16l16 7 16-7V16"/><path d="M24 23v17"/></svg>
+        </div>
+        <div>
+          <h3>The Atelier Set</h3>
+          <p class="scent-note">Three signature candles, boxed</p>
+        </div>
+        <div class="card-foot">
+          <span class="price">$96</span>
+          <button class="add-link" onclick="addToCart('atelier-set','The Atelier Set',96,'box')">Add</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="view-all">
+      <a href="shop.html" class="btn ghost">View the full shop</a>
+    </div>
+  </section>
+
+  <section class="story">
+    <div class="story-visual">
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1"><path d="M24 6c3 4 4.5 6.6 4.5 9 0 2.4-2 4-4.5 4s-4.5-1.6-4.5-4c0-2.4 1.5-5 4.5-9z"/><rect x="14" y="20" width="20" height="20" rx="1"/><line x1="14" y1="26" x2="34" y2="26"/></svg>
+    </div>
+    <div class="story-copy">
+      <span class="eyebrow">The glasshouse, on the edge of town</span>
+      <p class="lede">We pour on Tuesdays. Everything else is timing.</p>
+      <p class="body">Each fragrance rests for three weeks before it's poured, and every jar is hand-labelled the day it's packed. We keep runs small enough that a scent can sell out — and stay sold out — rather than reformulate it thinner to keep up.</p>
+      <a href="about.html" class="btn ghost">Read about the atelier</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap footer-grid">
+    <div>
+      <a href="index.html" class="wordmark">Nocturne <span>&amp; Co.</span></a>
+      <p style="margin-top:16px;">Small-batch candles and home fragrance, hand-poured in a converted glasshouse.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul class="footer-links">
+        <li><a href="shop.html">Candles</a></li>
+        <li><a href="shop.html">Diffusers &amp; mists</a></li>
+        <li><a href="shop.html">Care tools</a></li>
+        <li><a href="shop.html">Gift sets</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Studio</h4>
+      <ul class="footer-links">
+        <li><a href="about.html">The Atelier</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html">Wholesale</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Visit</h4>
+      <p>19 Kiln Row<br>Bristol, BS1</p>
+      <p style="margin-top:10px;">Tues–Sat, 10–5</p>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>&copy; 2026 Nocturne &amp; Co.</span>
+    <span>Poured by hand, every time.</span>
+  </div>
+</footer>
+
+<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-head">
+    <h3>Your basket</h3>
+    <button class="cart-close" onclick="closeCart()">&times;</button>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-foot">
+    <div class="cart-subtotal">
+      <span>Subtotal</span>
+      <span class="amount" id="cart-subtotal-amount">$0.00</span>
+    </div>
+    <a href="contact.html" class="btn solid" style="width:100%; justify-content:center;">Checkout</a>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+<script type="module">
+	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+	createChat({
+		webhookUrl: 'http://localhost:5678/webhook/16423bc8-2c21-46bd-b0e8-edc1254bcd5a/chat'
+	});
+</script>
+</body>
+</html>

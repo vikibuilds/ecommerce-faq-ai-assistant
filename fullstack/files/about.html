@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Atelier — Nocturne & Co.</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+  .about-hero{ padding:64px 0 20px; max-width:640px; }
+  .about-hero p{ color:var(--linen-dim); margin-top:18px; font-size:1.05rem; }
+
+  .timeline{ padding:90px 0; border-top:1px solid var(--line); }
+  .t-row{
+    display:grid; grid-template-columns:140px 1fr; gap:36px;
+    padding:34px 0; border-bottom:1px solid var(--line);
+  }
+  .t-row:first-of-type{ padding-top:0; }
+  .t-year{ font-family:var(--serif); font-size:1.5rem; color:var(--brass-light); }
+  .t-copy h3{ margin-bottom:10px; font-size:1.25rem; }
+  .t-copy p{ color:var(--linen-dim); max-width:56ch; }
+
+  .values{ padding:20px 0 100px; display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line); border:1px solid var(--line); }
+  .value-card{ background:var(--panel); padding:36px 30px; }
+  .value-card .mark{ font-family:var(--serif); font-style:italic; color:var(--brass); font-size:1.6rem; display:block; margin-bottom:16px; }
+  .value-card p{ color:var(--linen-dim); font-size:0.94rem; }
+
+  .quote-block{
+    padding:60px 0 110px; text-align:center; border-top:1px solid var(--line);
+  }
+  .quote-block blockquote{
+    font-family:var(--serif); font-style:italic; font-size:clamp(1.5rem,3vw,2.2rem);
+    max-width:760px; margin:0 auto 20px; line-height:1.3; color:var(--linen);
+  }
+  .quote-block cite{ color:var(--sage); font-size:0.9rem; font-style:normal; }
+
+  @media (max-width:860px){
+    .values{ grid-template-columns:1fr; }
+    .t-row{ grid-template-columns:1fr; gap:10px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav-row">
+    <a href="index.html" class="wordmark">Nocturne <span>&amp; Co.</span></a>
+    <nav class="links">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html" class="active">The Atelier</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <button class="cart-btn" onclick="openCart()">
+        Basket <span class="cart-count" id="cart-count">0</span>
+      </button>
+      <button class="menu-toggle" onclick="toggleMobileNav()">&#9776;</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="about-hero">
+    <span class="eyebrow">Bristol, since 2019</span>
+    <h1 style="font-size:clamp(2.2rem,4.5vw,3.4rem); margin-top:16px;">A glasshouse, not a factory.</h1>
+    <p>Nocturne &amp; Co. started as one pot on a stove and a scent that wouldn't leave a friend's kitchen. Seven years on, we still pour every candle by hand, in a converted glasshouse on the edge of the city — just at a slightly larger stove.</p>
+  </section>
+
+  <section class="timeline">
+    <div class="t-row">
+      <span class="t-year">2019</span>
+      <div class="t-copy">
+        <h3>One scent, one kitchen</h3>
+        <p>The first batch of Amber Dusk was poured in jam jars and given away at a friend's dinner party. Three people asked where to buy more. There was nowhere.</p>
+      </div>
+    </div>
+    <div class="t-row">
+      <span class="t-year">2021</span>
+      <div class="t-copy">
+        <h3>The glasshouse</h3>
+        <p>We took over a disused glasshouse behind a old print works, kept the skylights, and built our pouring bench under them. Natural light still tells us when a batch has set.</p>
+      </div>
+    </div>
+    <div class="t-row">
+      <span class="t-year">2023</span>
+      <div class="t-copy">
+        <h3>The refill counter</h3>
+        <p>Rather than sell more vessels, we opened a Saturday refill counter. Bring a jar back, we clean and refill it, at two-thirds of the price of a new one.</p>
+      </div>
+    </div>
+    <div class="t-row">
+      <span class="t-year">2026</span>
+      <div class="t-copy">
+        <h3>Twelve pieces, on purpose</h3>
+        <p>We keep the range deliberately small — five candles, two diffusers, a mist, an incense, two tools and one set. When something sells out, we let it stay sold out.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="values">
+    <div class="value-card">
+      <span class="mark">i.</span>
+      <h3 style="margin-bottom:10px;">Small runs</h3>
+      <p>Twelve candles poured at a time, by one person, start to finish — never a production line.</p>
+    </div>
+    <div class="value-card">
+      <span class="mark">ii.</span>
+      <h3 style="margin-bottom:10px;">Honest materials</h3>
+      <p>Coconut-soy wax, cotton wicks, and fragrance built from essential oils we can name.</p>
+    </div>
+    <div class="value-card">
+      <span class="mark">iii.</span>
+      <h3 style="margin-bottom:10px;">Kept, not thrown</h3>
+      <p>Vessels come back to us for refilling, or go home with someone else's cuttings in them.</p>
+    </div>
+  </section>
+
+  <section class="quote-block">
+    <blockquote>&ldquo;We'd rather sell out of something good than keep something average in stock.&rdquo;</blockquote>
+    <cite>— founding note, pinned above the pouring bench</cite>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap footer-grid">
+    <div>
+      <a href="index.html" class="wordmark">Nocturne <span>&amp; Co.</span></a>
+      <p style="margin-top:16px;">Small-batch candles and home fragrance, hand-poured in a converted glasshouse.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul class="footer-links">
+        <li><a href="shop.html">Candles</a></li>
+        <li><a href="shop.html">Diffusers &amp; mists</a></li>
+        <li><a href="shop.html">Care tools</a></li>
+        <li><a href="shop.html">Gift sets</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Studio</h4>
+      <ul class="footer-links">
+        <li><a href="about.html">The Atelier</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html">Wholesale</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Visit</h4>
+      <p>19 Kiln Row<br>Bristol, BS1</p>
+      <p style="margin-top:10px;">Tues–Sat, 10–5</p>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>&copy; 2026 Nocturne &amp; Co.</span>
+    <span>Poured by hand, every time.</span>
+  </div>
+</footer>
+
+<div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-head">
+    <h3>Your basket</h3>
+    <button class="cart-close" onclick="closeCart()">&times;</button>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-foot">
+    <div class="cart-subtotal">
+      <span>Subtotal</span>
+      <span class="amount" id="cart-subtotal-amount">$0.00</span>
+    </div>
+    <a href="contact.html" class="btn solid" style="width:100%; justify-content:center;">Checkout</a>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
